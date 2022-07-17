@@ -1,0 +1,147 @@
+%YAML:1.0
+
+#--------------------------------------------------------------------------------------------
+# Camera Parameters. Adjust them!
+#--------------------------------------------------------------------------------------------
+
+# Camera calibration and distortion parameters (OpenCV) 
+Camera.fx: 707.0912
+Camera.fy: 707.0912
+Camera.cx: 601.8873
+Camera.cy: 183.1104
+
+Camera.k1: 0.0
+Camera.k2: 0.0
+Camera.p1: 0.0
+Camera.p2: 0.0
+
+# Camera frames per second 
+Camera.fps: 10.0
+
+# Color order of the images (0: BGR, 1: RGB. It is ignored if images are grayscale)
+Camera.RGB: 0
+
+Camera.width: 1226
+Camera.height: 370
+
+# Close/Far threshold. Baseline times.
+ThDepth: 2200.0
+
+# Deptmap values factor 
+DepthMapFactor: 1.0
+
+# IR projector baseline times fx (aprox.)
+Camera.bf: 40.0
+
+#--------------------------------------------------------------------------------------------
+# ORB Parameters
+#--------------------------------------------------------------------------------------------
+
+# ORB Extractor: Number of features per image
+ORBextractor.nFeatures: 3000
+
+# ORB Extractor: Scale factor between levels in the scale pyramid 	
+ORBextractor.scaleFactor: 1.2
+
+# ORB Extractor: Number of levels in the scale pyramid	
+ORBextractor.nLevels: 8
+
+# ORB Extractor: Fast threshold
+# Image is divided in a grid. At each cell FAST are extracted imposing a minimum response.
+# Firstly we impose iniThFAST. If no corners are detected we impose a lower value minThFAST
+# You can lower these values if your images have low contrast			
+ORBextractor.iniThFAST: 20
+ORBextractor.minThFAST: 7
+
+LidarCamera.need_inverse: 0
+LidarCamera.extrinsicParameters: [-0.001857739385241, -0.9999659513510, -0.008039975204516, -0.004784029760483,
+          -0.006481465826011,  0.008051860151134, -0.9999466081774, -0.07337429464231,
+           0.9999773098287, -0.001805528627661, -0.006496203536139, -0.3339968064433,
+              0, 0, 0, 1] 
+
+
+#--------------------------------------------------------------------------------------------
+# feature depth extraction
+#--------------------------------------------------------------------------------------------
+depth_init_config: /home/kinggreat24/ORB_SLAM2/Examples/Monocular-Lidar/limo_parameters_kitti.yaml
+# 0: delauny_all   1: delauny_obj     2: limo        3: camvox
+depth_init_type: 1
+
+#--------------------------------------------------------------------------------------------
+# LIDAR INFORMATION 
+#--------------------------------------------------------------------------------------------
+Lidar.type: "HDL_64E"
+
+
+# Tracker Setting
+# ScaleEstimator : None, TDistributionScale
+# WeightFunction attribute : None, TDistributionWeight
+# max leve : seq2 = 1, seq3 = 3->0, seq12 = 1, seq20 = 0, seq21 = 1
+Tracker.levels:          3
+Tracker.min_level:       0
+Tracker.max_level:       2
+Tracker.max_iteration:   100
+Tracker.scale_estimator: "TDistributionScale"
+Tracker.weight_function: "TDistributionWeight"
+
+
+ReprojTracker.levels:          3
+ReprojTracker.max_iteration:   100
+ReprojTracker.scale_estimator: "MadScale"
+ReprojTracker.weight_function: "HuberWeight"
+
+
+#--------------------------------------------------------------------------------------------
+# LIDAR related Parameters
+#--------------------------------------------------------------------------------------------
+patchwork.verbose: 0   # To check effect of uprightness/elevation/flatness
+patchwork.visualize: 0 # Ground Likelihood Estimation is visualized
+
+# Ground Plane Fitting parameters
+patchwork.GPF.sensor_height: 1.73
+patchwork.GPF.num_iter: 3
+patchwork.GPF.num_lpr: 20
+patchwork.GPF.num_min_pts: 10
+patchwork.GPF.th_seeds: 0.5
+patchwork.GPF.th_dist: 0.125
+patchwork.GPF.max_r: 80.0
+patchwork.GPF.min_r: 2.7 # to consider vicinity of mobile plot form.
+patchwork.GPF.uprightness_thr: 0.707 # For uprightness. 45: 0.707 / 60: 0.866. The larger, the more conservative
+# The points below the adaptive_seed_selection_margin * sensor_height are filtered
+
+patchwork.adaptive_seed_selection_margin: -1.1
+patchwork.using_global_elevation: false
+patchwork.global_elevation_threshold: -0.5
+patchwork.uniform.num_rings: 16
+patchwork.uniform.num_sectors: 54
+
+# Note that `num_zones` == size of `num_sectors_each_zone` == size of `num_rings_each_zone` == size of `min_ranges` - 1
+# To divide zones, max_r, min_r, and min_ranges are utilized
+patchwork.czm.num_zones: 4
+patchwork.czm.num_sectors_each_zone: [16, 32 ,54, 32]
+patchwork.czm.num_rings_each_zone: [2, 4, 4, 4]
+patchwork.czm.min_ranges_each_zone: [2.7, 12.3625, 22.025, 41.35]
+patchwork.czm.elevation_thresholds:  [-1.2, -0.9984, -0.851, -0.605] # For elevation. The size should be equal to flatness_thresholds vector
+patchwork.czm.flatness_thresholds:  [0.0, 0.000125, 0.000185, 0.000185]  # For flatness. The size should be equal to elevation_thresholds vector
+
+
+#--------------------------------------------------------------------------------------------
+# loopclosure Parameters
+#--------------------------------------------------------------------------------------------
+LoopClosure.enable_localmapping: 1
+LoopClosure.enable_loopclosure:  0
+
+#--------------------------------------------------------------------------------------------
+# Viewer Parameters
+#--------------------------------------------------------------------------------------------
+Viewer.KeyFrameSize: 0.6
+Viewer.KeyFrameLineWidth: 2
+Viewer.GraphLineWidth: 1
+Viewer.PointSize: 2
+Viewer.CameraSize: 0.7
+Viewer.CameraLineWidth: 3
+Viewer.ViewpointX: 0
+Viewer.ViewpointY: -100
+Viewer.ViewpointZ: -0.1
+Viewer.ViewpointF: 2000
+

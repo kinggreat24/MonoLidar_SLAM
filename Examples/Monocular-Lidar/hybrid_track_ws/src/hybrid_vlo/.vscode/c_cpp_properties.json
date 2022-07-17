@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/usr/include/eigen3",
+                "/usr/include/pcl-1.8",
+                "/usr/local/vikit_common/include",
+                "/home/kinggreat24/cmake_ws/libSGM/include",
+                "/usr/local/cuda-11.4/targets/x86_64-linux/include",
+                "/usr/local/sophus/include",
+                "/opt/ros/",
+                "/opt/ros/melodic/include"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "gnu11",
+            "cppStandard": "gnu++14",
+            "intelliSenseMode": "linux-gcc-x64"
+        }
+    ],
+    "version": 4
+}

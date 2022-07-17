@@ -1,0 +1,15 @@
+<launch>
+    <arg name="sequence" default="00" />
+    <node name="hybrid_tracking_node" pkg="hybrid_tracking_ros" type="hybrid_tracking_node" output="screen">
+        <param name="setting_file" type="string" value="/home/kinggreat24/ORB_SLAM2/Examples/Monocular-Lidar/KITTI04-12.yaml" />
+        <param name="voc_file" type="string" value="/home/kinggreat24/ORB_SLAM2/Vocabulary/ORBvoc.txt" />
+        <param name="data_sequence" type="string" value="/media/kinggreat24/Samsung_T5/data/kitti_data_full/odometry/unzip/data/dataset/sequences/$(arg sequence)" />
+    </node>
+
+    <node name="hybrid_tracking_rviz" pkg="rviz" type="rviz" args="-d $(find hybrid_tracking_ros)/rviz/hybrid_tracking.rviz" output="screen" />
+    <!-- Load rviz_car_model before rviz  x y z qx qy qz qw-->
+    <include file="$(find hybrid_tracking_ros)/launch/robot_car.launch">
+        <arg name="fixed_frame" value="base_link" />
+        <arg name="transform" value="0.0 0.0 0.0  0.0 0.0 0.0 1.0" />
+    </include>
+</launch>
